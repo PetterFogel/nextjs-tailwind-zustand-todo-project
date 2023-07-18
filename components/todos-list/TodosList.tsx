@@ -5,10 +5,15 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   todos: Todo[];
-  onDeleteTodoClick: (todoId: string) => void;
+  onDeleteTodoClick: (todos: Todo[]) => void;
 }
 
 export const TodosList: FC<Props> = ({ todos, onDeleteTodoClick }) => {
+  const deleteTodoHandler = (todoId: string) => {
+    const updatedList = todos.filter((t) => t.id !== todoId);
+    onDeleteTodoClick(updatedList);
+  };
+
   return (
     <ul role="list" className="h-full flex-1 flex-col divide-y rounded border bg-white p-3">
       {todos.map((todo) => (
@@ -19,7 +24,7 @@ export const TodosList: FC<Props> = ({ todos, onDeleteTodoClick }) => {
             <p className="text font-semibold capitalize">{todo.title}</p>
           </div>
           <div
-            onClick={() => onDeleteTodoClick(todo.id)}
+            onClick={() => deleteTodoHandler(todo.id)}
             className="invisible m-2 cursor-pointer rounded-md p-1 text-gray-500 hover:bg-red-500 hover:text-yellow-50 group-hover/item:visible">
             <TrashIcon className="color h-5 w-5" />
           </div>

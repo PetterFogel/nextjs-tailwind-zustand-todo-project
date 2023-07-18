@@ -9,10 +9,7 @@ export const TodosContainer: FC = () => {
 
   const addTodoHandler = (newTodo: Todo) => setTodos((prevState) => [...prevState, newTodo]);
 
-  const deleteTodoHandler = (todoId: string) => {
-    const updatedList = todos.filter((t) => t.id !== todoId);
-    setTodos(updatedList);
-  };
+  const deleteTodoHandler = (updatedList: Todo[]) => setTodos(updatedList);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
