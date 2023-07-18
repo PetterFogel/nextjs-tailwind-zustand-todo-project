@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  --color-default: rgb(248 250 252);
   --color-white: #FCFCFC;
   --color-black: #333333;
 }
@@ -15,5 +16,5 @@
 
 body {
   color: var(--color-black);
-  background-color: var(--color-white);
+  background-color: var(--color-default);
 }
