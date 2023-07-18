@@ -6,7 +6,9 @@ import { v4 as uuid } from "uuid";
 import { FC, useEffect, useState } from "react";
 
 export const TodosContainer: FC = () => {
-  const [todos, setTodos] = useState<Todo[]>(JSON.parse(localStorage.getItem("todoList") || "[]"));
+  const [todos, setTodos] = useState<Todo[]>(
+    typeof window !== "undefined" ? JSON.parse(localStorage.getItem("todoList") || "[]") : []
+  );
 
   const addTodoHandler = (value: string) => {
     const uniqueId = uuid();
