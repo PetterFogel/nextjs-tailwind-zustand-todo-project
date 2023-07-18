@@ -1,8 +1,10 @@
 "use client";
+import { Todo } from "@/types/todo";
 import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { v4 as uuid } from "uuid";
 
 interface Props {
-  onAddTodoClick: (value: string) => void;
+  onAddTodoClick: (todo: Todo) => void;
 }
 
 export const TodosForm: FC<Props> = ({ onAddTodoClick }) => {
@@ -12,7 +14,14 @@ export const TodosForm: FC<Props> = ({ onAddTodoClick }) => {
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onAddTodoClick(value);
+    const uniqueId = uuid();
+    const newTodo = {
+      id: uniqueId,
+      title: value,
+      description: "",
+      isDone: false
+    };
+    onAddTodoClick(newTodo);
     setValue("");
   };
 

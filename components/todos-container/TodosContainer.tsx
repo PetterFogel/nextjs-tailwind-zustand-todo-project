@@ -2,22 +2,12 @@
 import { Todo } from "@/types/todo";
 import { TodosForm } from "../todos-form/TodosForm";
 import { TodosList } from "../todos-list/TodosList";
-import { v4 as uuid } from "uuid";
 import { FC, useEffect, useState } from "react";
 
 export const TodosContainer: FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const addTodoHandler = (value: string) => {
-    const uniqueId = uuid();
-    const newTodo: Todo = {
-      id: uniqueId,
-      title: value,
-      description: "",
-      isDone: false
-    };
-    setTodos((prevState) => [...prevState, newTodo]);
-  };
+  const addTodoHandler = (newTodo: Todo) => setTodos((prevState) => [...prevState, newTodo]);
 
   const deleteTodoHandler = (todoId: string) => {
     const updatedList = todos.filter((t) => t.id !== todoId);
