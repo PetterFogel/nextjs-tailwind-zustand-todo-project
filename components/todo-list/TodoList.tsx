@@ -1,8 +1,8 @@
 "use client";
 import { FC } from "react";
 import { Todo } from "@/types/todo";
-import { TrashIcon } from "@heroicons/react/24/solid";
 import { Card } from "../card/Card";
+import { TodoItem } from "../todo-item/TodoItem";
 
 interface Props {
   todos: Todo[];
@@ -19,18 +19,7 @@ export const TodoList: FC<Props> = ({ todos, onDeleteTodoClick }) => {
     <Card>
       <ul role="list">
         {todos.map((todo) => (
-          <li
-            key={todo.id}
-            className="group/item flex items-center justify-between rounded-md px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900">
-            <div className="flex flex-col">
-              <p className="text-base font-medium capitalize">{todo.title}</p>
-            </div>
-            <div
-              onClick={() => deleteTodoHandler(todo.id)}
-              className="invisible m-2 cursor-pointer rounded-md text-gray-400 hover:text-red-500  group-hover/item:visible">
-              <TrashIcon className="color h-5 w-5" />
-            </div>
-          </li>
+          <TodoItem key={todo.id} todo={todo} onDeleteTodoClick={deleteTodoHandler} />
         ))}
       </ul>
     </Card>
