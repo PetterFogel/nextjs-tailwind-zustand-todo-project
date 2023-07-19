@@ -15,3 +15,17 @@
   }
 }
 
+@layer components {
+  .card {
+    @apply px-4;
+    @apply py-6;
+    @apply bg-white;
+    @apply border;
+    @apply rounded-lg;
+    @apply ring-1;
+    @apply ring-slate-900/5;
+    @apply shadow-md;
+    @apply flex-1;
+    @apply h-full
+  }
+}
