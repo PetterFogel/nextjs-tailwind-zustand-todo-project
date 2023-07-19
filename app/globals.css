@@ -38,4 +38,21 @@
     @apply ring-1;
     @apply ring-gray-950/10;
   }
+
+  .btn {
+    @apply appearance-none;
+    @apply rounded-lg;
+    @apply p-2;
+    @apply font-semibold;
+    @apply ring-1;
+    @apply ring-gray-950/10;
+ 
+  }
+
+  .btn-primary {
+    @apply text-white;
+    @apply bg-indigo-500;
+    @apply hover:bg-indigo-600;
+  }
 }
+

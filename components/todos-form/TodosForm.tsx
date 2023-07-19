@@ -31,9 +31,7 @@ export const TodosForm: FC<Props> = ({ onAddTodoClick }) => {
       <form onSubmit={submitHandler} className="flex flex-col gap-3">
         <input placeholder="Title" type="text" value={value} onChange={inputChangeHandler} />
         <input placeholder="Description" type="text" />
-        <button
-          className="text-l appearance-none rounded-lg bg-indigo-500 p-2 font-semibold text-white  ring-1 ring-gray-950/10 hover:bg-indigo-600"
-          type="submit">
+        <button className="btn btn-primary" type="submit">
           Add
         </button>
       </form>
