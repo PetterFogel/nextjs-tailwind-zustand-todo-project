@@ -21,7 +21,7 @@ export const TodosList: FC<Props> = ({ todos, onDeleteTodoClick }) => {
         {todos.map((todo) => (
           <li
             key={todo.id}
-            className="group/item flex items-center justify-between rounded-md px-3 py-2 hover:bg-slate-100">
+            className="group/item flex items-center justify-between rounded-md px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900">
             <div className="flex flex-col">
               <p className="text-base font-medium capitalize">{todo.title}</p>
             </div>
