@@ -10,8 +10,8 @@
 
 @layer base {
   body {
-    @apply text-black;
-    @apply bg-default;
+    @apply text-black dark:text-white;
+    @apply bg-defaultLight dark:bg-black;
   }
 }
 
@@ -19,8 +19,7 @@
   .card {
     @apply px-4;
     @apply py-6;
-    @apply bg-white;
-    @apply border;
+    @apply bg-white dark:bg-defaultDark;
     @apply rounded-lg;
     @apply ring-1;
     @apply ring-slate-900/5;
@@ -36,7 +35,8 @@
     @apply py-2;
     @apply shadow;
     @apply ring-1;
-    @apply ring-gray-950/10;
+    @apply dark:bg-defaultDark;
+    @apply ring-gray-950/10 dark:ring-gray-500;
   }
 
   .btn {
