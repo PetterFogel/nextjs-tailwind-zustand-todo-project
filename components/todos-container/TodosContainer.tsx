@@ -7,12 +7,7 @@ import { FC, useEffect, useState } from "react";
 
 export const TodosContainer: FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [enabled, setEnabled] = useState(
-    typeof window !== "undefined"
-      ? localStorage.theme === "dark" ||
-          (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
-      : false
-  );
+  const [enabled, setEnabled] = useState(false);
 
   const addTodoHandler = (newTodo: Todo) => setTodos((prevState) => [...prevState, newTodo]);
 
@@ -29,8 +24,18 @@ export const TodosContainer: FC = () => {
   }, [todos]);
 
   useEffect(() => {
-    if (enabled) return document.documentElement.classList.add("dark");
-    document.documentElement.classList.remove("dark");
+    if (
+      typeof window !== "undefined"
+        ? localStorage.theme === "dark" ||
+          (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        : false
+    ) {
+      setEnabled(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setEnabled(false);
+      document.documentElement.classList.remove("dark");
+    }
   }, [enabled]);
 
   const toggleSwitchHandler = (checked: boolean) => {
