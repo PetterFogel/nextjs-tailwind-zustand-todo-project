@@ -8,7 +8,7 @@ interface Props {
   onAddTodoClick: (todo: Todo) => void;
 }
 
-export const TodosForm: FC<Props> = ({ onAddTodoClick }) => {
+export const TodoForm: FC<Props> = ({ onAddTodoClick }) => {
   const [value, setValue] = useState("");
 
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);

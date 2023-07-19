@@ -1,11 +1,11 @@
 "use client";
 import { Todo } from "@/types/todo";
-import { TodosForm } from "../todos-form/TodosForm";
-import { TodosList } from "../todos-list/TodosList";
+import { TodoForm } from "../todo-form/TodoForm";
+import { TodoList } from "../todo-list/TodoList";
 import { FC, useEffect, useState } from "react";
 import { DarkModePanel } from "../dark-mode-panel/DarkModePanel";
 
-export const TodosContainer: FC = () => {
+export const TodoContainer: FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const addTodoHandler = (newTodo: Todo) => setTodos((prevState) => [...prevState, newTodo]);
@@ -27,13 +27,13 @@ export const TodosContainer: FC = () => {
       <DarkModePanel />
       <h1 className="p-4 text-center text-4xl">Todays Todos</h1>
       <div className="flex flex-col gap-4 text-sm lg:flex-row">
-        <TodosForm onAddTodoClick={addTodoHandler} />
+        <TodoForm onAddTodoClick={addTodoHandler} />
         {!todos || todos.length === 0 ? (
-          <div className="flex-1 text-center">
-            <h2 className="text-lg">List is empty, please add some todos!</h2>
+          <div className="flex-1 px-4 text-center">
+            <h2 className="text-base md:text-lg">List is empty, please add some todos!</h2>
           </div>
         ) : (
-          <TodosList todos={todos} onDeleteTodoClick={deleteTodoHandler} />
+          <TodoList todos={todos} onDeleteTodoClick={deleteTodoHandler} />
         )}
       </div>
     </div>

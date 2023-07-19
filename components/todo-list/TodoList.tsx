@@ -9,7 +9,7 @@ interface Props {
   onDeleteTodoClick: (todos: Todo[]) => void;
 }
 
-export const TodosList: FC<Props> = ({ todos, onDeleteTodoClick }) => {
+export const TodoList: FC<Props> = ({ todos, onDeleteTodoClick }) => {
   const deleteTodoHandler = (todoId: string) => {
     const updatedList = todos.filter((t) => t.id !== todoId);
     onDeleteTodoClick(updatedList);
