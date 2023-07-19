@@ -1,15 +1,17 @@
 "use client";
 import { Todo } from "@/types/todo";
 import { TodosForm } from "../todos-form/TodosForm";
+import { Switch } from "@headlessui/react";
 import { TodosList } from "../todos-list/TodosList";
 import { FC, useEffect, useState } from "react";
-import { Switch } from "@headlessui/react";
 
 export const TodosContainer: FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [enabled, setEnabled] = useState(
-    localStorage.theme === "dark" ||
-      (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    typeof window !== "undefined"
+      ? localStorage.theme === "dark" ||
+          (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
+      : false
   );
 
   const addTodoHandler = (newTodo: Todo) => setTodos((prevState) => [...prevState, newTodo]);
