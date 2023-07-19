@@ -23,7 +23,7 @@ export const TodosContainer: FC = () => {
   }, [todos]);
 
   return (
-    <div className="flex flex-col bg-white dark:bg-black">
+    <div className="flex flex-col dark:bg-black">
       <DarkModePanel />
       <h1 className="p-4 text-center text-4xl">Todays Todos</h1>
       <div className="flex flex-col gap-4 text-sm lg:flex-row">

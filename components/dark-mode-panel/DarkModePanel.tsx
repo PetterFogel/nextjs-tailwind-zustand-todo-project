@@ -1,15 +1,16 @@
 import { FC, useEffect, useState } from "react";
 import { Switch } from "@headlessui/react";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 
 export const DarkModePanel: FC = () => {
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (
+    const isDarkMode =
       localStorage.theme === "dark" ||
-      (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
+      (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    if (isDarkMode) {
       setEnabled(true);
       document.documentElement.classList.add("dark");
       return;
@@ -29,13 +30,14 @@ export const DarkModePanel: FC = () => {
       onChange={toggleSwitchHandler}
       className={`${
         enabled ? "bg-indigo-500" : "bg-gray-200"
-      } relative inline-flex h-6 w-11 items-center rounded-full`}>
+      } relative inline-flex h-6 w-11 items-center self-end rounded-full`}>
       <span className="sr-only">Enable notifications</span>
-      <span
+      <div
         className={`${
           enabled ? "translate-x-6" : "translate-x-1"
-        } inline-block h-4 w-4 transform rounded-full bg-white transition`}
-      />
+        } inline-block h-4 w-4 transform rounded-full  transition`}>
+        {enabled ? <MoonIcon className="h-4 w-4" /> : <SunIcon className="h-4 w-4" />}
+      </div>
     </Switch>
   );
 };
