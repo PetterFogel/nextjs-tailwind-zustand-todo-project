@@ -15,10 +15,12 @@ export const TodosForm: FC<Props> = ({ onAddTodoClick }) => {
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const isValueEmpty = !value.replace(/\s/g, "").length;
+    if (isValueEmpty) return;
     const uniqueId = uuid();
     const newTodo = {
       id: uniqueId,
-      title: value,
+      title: value.trim(),
       description: "",
       isDone: false
     };
