@@ -2,19 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --color-default: rgb(248 250 252);
-  --color-white: #FCFCFC;
-  --color-black: #333333;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  color: var(--color-black);
-  background-color: var(--color-default);
+@layer base {
+  body {
+    @apply text-black;
+    @apply bg-default;
+  }
 }
+
