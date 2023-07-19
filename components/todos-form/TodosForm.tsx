@@ -28,7 +28,7 @@ export const TodosForm: FC<Props> = ({ onAddTodoClick }) => {
   return (
     <form
       onSubmit={submitHandler}
-      className="flex h-full flex-1 flex-col  gap-3 rounded-lg border bg-white  px-4 py-6 shadow-md  ring-1 ring-slate-900/5 dark:bg-slate-800">
+      className="flex h-full flex-1 flex-col gap-3 rounded-lg border bg-white  px-4 py-6 shadow-md  ring-1 ring-slate-900/5 dark:bg-slate-800">
       <input
         className="appearance-none rounded-md px-3 py-2 shadow ring-1 ring-gray-950/10"
         placeholder="Title"
