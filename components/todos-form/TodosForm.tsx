@@ -29,18 +29,8 @@ export const TodosForm: FC<Props> = ({ onAddTodoClick }) => {
   return (
     <Card>
       <form onSubmit={submitHandler} className="flex flex-col gap-3">
-        <input
-          className="appearance-none rounded-md px-3 py-2 shadow ring-1 ring-gray-950/10"
-          placeholder="Title"
-          type="text"
-          value={value}
-          onChange={inputChangeHandler}
-        />
-        <input
-          className="appearance-none rounded-md px-3 py-2 shadow ring-1 ring-gray-950/10"
-          placeholder="Description"
-          type="text"
-        />
+        <input placeholder="Title" type="text" value={value} onChange={inputChangeHandler} />
+        <input placeholder="Description" type="text" />
         <button
           className="text-l appearance-none rounded-lg bg-indigo-500 p-2 font-semibold text-white  ring-1 ring-gray-950/10 hover:bg-indigo-600"
           type="submit">

@@ -28,4 +28,14 @@
     @apply flex-1;
     @apply h-full
   }
+
+  input {
+    @apply appearance-none;
+    @apply rounded-md;
+    @apply px-3;
+    @apply py-2;
+    @apply shadow;
+    @apply ring-1;
+    @apply ring-gray-950/10;
+  }
 }
