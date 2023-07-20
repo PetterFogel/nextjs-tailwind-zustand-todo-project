@@ -28,30 +28,52 @@
     @apply h-full
   }
 
-  input {
+  input[type=text] {
     @apply appearance-none;
     @apply rounded-md;
     @apply px-3;
     @apply py-2;
     @apply shadow;
     @apply ring-1;
+    @apply border-none;
+    @apply text-sm;
     @apply dark:bg-defaultDark;
     @apply ring-gray-950/10 dark:ring-gray-500;
+    @apply focus:ring-indigo-500;
+
+  }
+
+  input[type=checkbox] {
+    @apply h-6;
+    @apply w-6;
+    @apply shadow-sm;
+    @apply rounded-full;
+    @apply cursor-pointer;
+    @apply focus:ring-2;
+    @apply focus:ring-indigo-500;
+    @apply bg-white dark:bg-defaultDark;
+    @apply border-gray-700/20 dark:border-gray-500;
+  }
+
+  input[type=checkbox]:checked {
+    @apply bg-primary;
+
   }
 
   .btn {
-    @apply appearance-none;
-    @apply rounded-lg;
     @apply p-2;
-    @apply font-semibold;
     @apply ring-1;
+    @apply rounded-lg;
+    @apply font-semibold;
+    @apply appearance-none;
     @apply ring-gray-950/10;
+    @apply focus:ring-indigo-500;
  
   }
 
   .btn-primary {
     @apply text-white;
-    @apply bg-indigo-500;
+    @apply bg-primary;
     @apply hover:bg-indigo-600;
   }
 }
