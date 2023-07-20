@@ -32,7 +32,7 @@ export const TodoItem: FC<Props> = ({ todo, onDeleteTodoClick, onCheckTodoClick 
         </div>
       </div>
       {todo.description && (
-        <p className="hidden text-sm capitalize text-slate-500 group-hover/item:block dark:text-slate-400">
+        <p className="hidden text-sm text-slate-500 group-hover/item:block dark:text-slate-400">
           {todo.description}
         </p>
       )}
