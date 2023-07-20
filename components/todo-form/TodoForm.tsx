@@ -34,13 +34,20 @@ export const TodoForm: FC<Props> = ({ onAddTodoClick }) => {
   return (
     <Card>
       <form onSubmit={submitHandler} className="flex flex-col gap-3">
-        <input placeholder="Title" type="text" value={titleValue} onChange={titleChangeHandler} />
         <input
-          placeholder="Description"
+          required
           type="text"
+          placeholder="Title"
+          value={titleValue}
+          onChange={titleChangeHandler}
+        />
+        <input
+          type="text"
+          placeholder="Description"
           value={descValue}
           onChange={descChangeHandler}
         />
+
         <button className="btn btn-primary" type="submit">
           Add
         </button>
