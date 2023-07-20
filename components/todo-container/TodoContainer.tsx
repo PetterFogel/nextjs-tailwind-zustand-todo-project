@@ -7,7 +7,7 @@ import { CalendarPanel } from "../calendar-panel/CalendarPanel";
 
 export const TodoContainer: FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [dateValue, setDateValue] = useState(0);
+  const [counter, setCounter] = useState(0);
   const [selectedDate, setSelectedDate] = useState({
     dayName: "",
     date: ""
@@ -29,15 +29,15 @@ export const TodoContainer: FC = () => {
 
   useEffect(() => {
     const date = new Date();
-    date.setDate(date.getDate() + dateValue);
+    date.setDate(date.getDate() + counter);
     setSelectedDate({
       dayName: date.toLocaleString("en-GB", { weekday: "long" }),
       date: date.toLocaleString("en-GB", { dateStyle: "medium" })
     });
-  }, [dateValue, todos]);
+  }, [counter]);
 
-  const decreaseDateHandler = () => setDateValue((dateValue) => dateValue - 1);
-  const increaseDateHandler = () => setDateValue((dateValue) => dateValue + 1);
+  const decreaseDateHandler = () => setCounter((counter) => counter - 1);
+  const increaseDateHandler = () => setCounter((counter) => counter + 1);
 
   const todosByDate = todos.filter((t) => t.createdAt === selectedDate.date);
 
