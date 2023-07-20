@@ -19,7 +19,7 @@ export const TodoContainer: FC = () => {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const list = JSON.parse(localStorage.getItem("todoList") || "[]");
+    const list: Todo[] = JSON.parse(localStorage.getItem("todoList") || "[]");
     setTodos(list);
   }, []);
 
@@ -34,10 +34,12 @@ export const TodoContainer: FC = () => {
       dayName: date.toLocaleString("en-GB", { weekday: "long" }),
       date: date.toLocaleString("en-GB", { dateStyle: "medium" })
     });
-  }, [dateValue]);
+  }, [dateValue, todos]);
 
   const decreaseDateHandler = () => setDateValue((dateValue) => dateValue - 1);
   const increaseDateHandler = () => setDateValue((dateValue) => dateValue + 1);
+
+  const todosByDate = todos.filter((t) => t.createdAt === selectedDate.date);
 
   return (
     <>
@@ -48,13 +50,13 @@ export const TodoContainer: FC = () => {
       />
       <div className="flex flex-col gap-4 text-sm lg:flex-row">
         <TodoForm onAddTodoClick={addTodoHandler} selectedDate={selectedDate.date} />
-        {!todos || todos.length === 0 ? (
+        {!todos || todosByDate.length === 0 ? (
           <div className="flex-1 px-4 text-center">
-            <h2 className="text-base md:text-lg">List is empty, please add some todos!</h2>
+            <h2 className="text-base md:text-lg">Please add some todos for this date!</h2>
           </div>
         ) : (
           <TodoList
-            todos={todos}
+            todos={todosByDate}
             onDeleteTodoClick={deleteTodoHandler}
             onCheckTodoClick={todoCheckHandler}
           />
