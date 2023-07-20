@@ -1,16 +1,27 @@
-import { FC } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { Todo } from "@/types/todo";
 import { TrashIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   todo: Todo;
   onDeleteTodoClick: (todoId: string) => void;
+  onCheckTodoClick: (todo: Todo) => void;
 }
 
-export const TodoItem: FC<Props> = ({ todo, onDeleteTodoClick }) => {
+export const TodoItem: FC<Props> = ({ todo, onDeleteTodoClick, onCheckTodoClick }) => {
+  const checkTodoHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    onCheckTodoClick({ ...todo, isDone: event.target.checked });
+  };
+
   return (
     <li className="group/item flex items-center justify-between rounded-md p-3 hover:bg-slate-100 dark:hover:bg-slate-900">
-      <div className="flex flex-col">
+      <div className="flex items-center justify-center gap-3">
+        <input
+          onChange={checkTodoHandler}
+          checked={todo.isDone}
+          id="checked-checkbox"
+          type="checkbox"
+        />
         <p className="text-base font-medium capitalize">{todo.title}</p>
       </div>
       <div

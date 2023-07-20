@@ -12,6 +12,8 @@ export const TodoContainer: FC = () => {
 
   const deleteTodoHandler = (updatedList: Todo[]) => setTodos(updatedList);
 
+  const todoCheckHandler = (updatedList: Todo[]) => setTodos(updatedList);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     const list = JSON.parse(localStorage.getItem("todoList") || "[]");
@@ -33,7 +35,11 @@ export const TodoContainer: FC = () => {
             <h2 className="text-base md:text-lg">List is empty, please add some todos!</h2>
           </div>
         ) : (
-          <TodoList todos={todos} onDeleteTodoClick={deleteTodoHandler} />
+          <TodoList
+            todos={todos}
+            onDeleteTodoClick={deleteTodoHandler}
+            onCheckTodoClick={todoCheckHandler}
+          />
         )}
       </div>
     </div>
