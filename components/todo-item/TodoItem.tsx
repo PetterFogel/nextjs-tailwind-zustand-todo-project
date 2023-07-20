@@ -31,9 +31,11 @@ export const TodoItem: FC<Props> = ({ todo, onDeleteTodoClick, onCheckTodoClick 
           <TrashIcon className="color h-5 w-5" />
         </div>
       </div>
-      <p className="hidden text-sm capitalize text-slate-500 group-hover/item:block dark:text-slate-400">
-        {todo.description}
-      </p>
+      {todo.description && (
+        <p className="hidden text-sm capitalize text-slate-500 group-hover/item:block dark:text-slate-400">
+          {todo.description}
+        </p>
+      )}
     </li>
   );
 };

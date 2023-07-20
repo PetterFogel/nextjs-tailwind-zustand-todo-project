@@ -9,30 +9,38 @@ interface Props {
 }
 
 export const TodoForm: FC<Props> = ({ onAddTodoClick }) => {
-  const [value, setValue] = useState("");
+  const [titleValue, setTitleValue] = useState("");
+  const [descValue, setDescValue] = useState("");
 
-  const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
+  const titleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setTitleValue(e.target.value);
+  const descChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setDescValue(e.target.value);
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isValueEmpty = !value.replace(/\s/g, "").length;
+    const isValueEmpty = !titleValue.replace(/\s/g, "").length;
     if (isValueEmpty) return;
     const uniqueId = uuid();
     const newTodo = {
       id: uniqueId,
-      title: value.trim(),
-      description: "",
+      title: titleValue.trim(),
+      description: descValue.trim(),
       isDone: false
     };
     onAddTodoClick(newTodo);
-    setValue("");
+    setTitleValue("");
+    setDescValue("");
   };
 
   return (
     <Card>
       <form onSubmit={submitHandler} className="flex flex-col gap-3">
-        <input placeholder="Title" type="text" value={value} onChange={inputChangeHandler} />
-        <input placeholder="Description" type="text" />
+        <input placeholder="Title" type="text" value={titleValue} onChange={titleChangeHandler} />
+        <input
+          placeholder="Description"
+          type="text"
+          value={descValue}
+          onChange={descChangeHandler}
+        />
         <button className="btn btn-primary" type="submit">
           Add
         </button>
