@@ -6,7 +6,6 @@ export default function Home() {
   return (
     <main className="m-auto flex max-w-5xl flex-col gap-4 p-4">
       <DarkModePanel />
-      <CalendarPanel />
       <TodoContainer />
     </main>
   );

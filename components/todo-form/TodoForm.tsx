@@ -5,10 +5,11 @@ import { v4 as uuid } from "uuid";
 import { Card } from "../card/Card";
 
 interface Props {
+  selectedDate: string;
   onAddTodoClick: (todo: Todo) => void;
 }
 
-export const TodoForm: FC<Props> = ({ onAddTodoClick }) => {
+export const TodoForm: FC<Props> = ({ selectedDate, onAddTodoClick }) => {
   const [titleValue, setTitleValue] = useState("");
   const [descValue, setDescValue] = useState("");
 
@@ -24,7 +25,8 @@ export const TodoForm: FC<Props> = ({ onAddTodoClick }) => {
       id: uniqueId,
       title: titleValue.trim(),
       description: descValue.trim(),
-      isDone: false
+      isDone: false,
+      createdAt: selectedDate
     };
     onAddTodoClick(newTodo);
     setTitleValue("");
