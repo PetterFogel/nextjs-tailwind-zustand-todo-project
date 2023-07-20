@@ -16,7 +16,8 @@ module.exports = {
         black: "#00002A",
         defaultLight: "#F8FAFC",
         defaultDark: "#1E293B",
-        primary: "#6366F1"
+        primary: "#6366F1",
+        primaryHover: "#4F46E5"
       }
     }
   },
