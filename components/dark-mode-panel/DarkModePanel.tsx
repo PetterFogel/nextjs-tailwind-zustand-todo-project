@@ -31,7 +31,7 @@ export const DarkModePanel: FC = () => {
       onChange={toggleSwitchHandler}
       className={`${
         enabled ? "bg-primary" : "bg-gray-200"
-      } relative inline-flex h-6 w-11 items-center self-end rounded-full`}>
+      } relative float-right inline-flex h-6 w-11 items-center rounded-full`}>
       <span className="sr-only">Enable notifications</span>
       <div
         className={`${
