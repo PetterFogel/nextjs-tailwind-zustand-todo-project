@@ -1,13 +1,14 @@
 "use client";
+import { FC, useEffect, useState } from "react";
 import { Todo } from "@/types/todo";
 import { TodoForm } from "../todo-form/TodoForm";
 import { TodoList } from "../todo-list/TodoList";
-import { FC, useEffect, useState } from "react";
+import { useStore } from "@/store/store";
 import { CalendarPanel } from "../calendar-panel/CalendarPanel";
 
 export const TodoContainer: FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [counter, setCounter] = useState(0);
+  const { counter } = useStore((state) => state);
   const [selectedDate, setSelectedDate] = useState({
     dayName: "",
     date: ""
@@ -36,18 +37,11 @@ export const TodoContainer: FC = () => {
     });
   }, [counter]);
 
-  const decreaseDateHandler = () => setCounter((counter) => counter - 1);
-  const increaseDateHandler = () => setCounter((counter) => counter + 1);
-
   const todosByDate = todos.filter((t) => t.createdAt === selectedDate.date);
 
   return (
     <>
-      <CalendarPanel
-        selectedDate={selectedDate}
-        onDecreaseDateClick={decreaseDateHandler}
-        onIncreaseDateClick={increaseDateHandler}
-      />
+      <CalendarPanel selectedDate={selectedDate} />
       <div className="flex flex-col gap-4 text-sm lg:flex-row">
         <TodoForm onAddTodoClick={addTodoHandler} selectedDate={selectedDate.date} />
         {!todos || todosByDate.length === 0 ? (
