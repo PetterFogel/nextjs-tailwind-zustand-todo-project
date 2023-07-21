@@ -1,11 +1,15 @@
 "use client";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { TodoForm } from "../todo-form/TodoForm";
 import { TodoList } from "../todo-list/TodoList";
 import { useStore } from "@/store/store";
 
 export const TodoContainer: FC = () => {
   const { selectedDate, todos } = useStore((state) => state);
+
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todos));
+  }, [todos]);
 
   const todosByDate = todos.filter((t) => t.createdAt === selectedDate.date);
 

@@ -15,9 +15,6 @@ interface State {
 const ifWindow = typeof window !== "undefined";
 const todos = ifWindow ? JSON.parse(localStorage.getItem("todoList") || "[]") : [];
 
-const setLocalStorageHandler = (state: Todo[]) =>
-  localStorage.setItem("todoList", JSON.stringify(state));
-
 export const useStore = create<State>()((set) => ({
   counter: 0,
   setCounter: (number) => set((state) => ({ counter: state.counter + number })),
@@ -33,24 +30,18 @@ export const useStore = create<State>()((set) => ({
   todos,
   addTodo: (newTodo) =>
     set((state) => {
-      setLocalStorageHandler([...state.todos, newTodo]);
       return {
         todos: [...state.todos, newTodo]
       };
     }),
   deleteTodo: (todoId) =>
     set((state) => {
-      setLocalStorageHandler(state.todos.filter((t) => t.id !== todoId));
       return {
         todos: state.todos.filter((t) => t.id !== todoId)
       };
     }),
   checkTodo: (todo) =>
     set((state) => {
-      const updatedList = state.todos.map((t) =>
-        t.id === todo.id ? { ...t, isDone: todo.isDone } : t
-      );
-      setLocalStorageHandler(updatedList);
       return {
         todos: state.todos.map((t) => (t.id === todo.id ? { ...t, isDone: todo.isDone } : t))
       };
