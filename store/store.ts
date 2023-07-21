@@ -9,14 +9,14 @@ interface State {
   todos: Todo[];
   addTodo: (newTodo: Todo) => void;
   deleteTodo: (todoId: string) => void;
+  checkTodo: (todo: Todo) => void;
 }
 
 const ifWindow = typeof window !== "undefined";
-
 const todos = ifWindow ? JSON.parse(localStorage.getItem("todoList") || "[]") : [];
 
-const setLocalStorageHandler = (state: State) =>
-  localStorage.setItem("todoList", JSON.stringify(state.todos));
+const setLocalStorageHandler = (state: Todo[]) =>
+  localStorage.setItem("todoList", JSON.stringify(state));
 
 export const useStore = create<State>()((set) => ({
   counter: 0,
@@ -33,16 +33,26 @@ export const useStore = create<State>()((set) => ({
   todos,
   addTodo: (newTodo) =>
     set((state) => {
-      setLocalStorageHandler(state);
+      setLocalStorageHandler([...state.todos, newTodo]);
       return {
         todos: [...state.todos, newTodo]
       };
     }),
   deleteTodo: (todoId) =>
     set((state) => {
-      setLocalStorageHandler(state);
+      setLocalStorageHandler(state.todos.filter((t) => t.id !== todoId));
       return {
         todos: state.todos.filter((t) => t.id !== todoId)
+      };
+    }),
+  checkTodo: (todo) =>
+    set((state) => {
+      const updatedList = state.todos.map((t) =>
+        t.id === todo.id ? { ...t, isDone: todo.isDone } : t
+      );
+      setLocalStorageHandler(updatedList);
+      return {
+        todos: state.todos.map((t) => (t.id === todo.id ? { ...t, isDone: todo.isDone } : t))
       };
     })
 }));

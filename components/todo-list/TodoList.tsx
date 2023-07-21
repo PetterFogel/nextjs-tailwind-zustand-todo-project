@@ -6,20 +6,14 @@ import { TodoItem } from "../todo-item/TodoItem";
 
 interface Props {
   todos: Todo[];
-  onCheckTodoClick: (todos: Todo[]) => void;
 }
 
-export const TodoList: FC<Props> = ({ todos, onCheckTodoClick }) => {
-  const checkTodoHandler = (todo: Todo) => {
-    todos = todos.map((t) => (t.id === todo.id ? { ...t, isDone: todo.isDone } : t));
-    onCheckTodoClick(todos);
-  };
-
+export const TodoList: FC<Props> = ({ todos }) => {
   return (
     <Card>
       <ul role="list">
         {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} onCheckTodoClick={checkTodoHandler} />
+          <TodoItem key={todo.id} todo={todo} />
         ))}
       </ul>
     </Card>

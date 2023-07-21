@@ -1,4 +1,3 @@
-"use client";
 import { ChangeEvent, FC } from "react";
 import { Todo } from "@/types/todo";
 import { useStore } from "@/store/store";
@@ -6,21 +5,17 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   todo: Todo;
-  onCheckTodoClick: (todo: Todo) => void;
 }
 
-export const TodoItem: FC<Props> = ({ todo, onCheckTodoClick }) => {
-  const { deleteTodo } = useStore((state) => state);
-  const checkTodoHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    onCheckTodoClick({ ...todo, isDone: event.target.checked });
-  };
+export const TodoItem: FC<Props> = ({ todo }) => {
+  const { deleteTodo, checkTodo } = useStore((state) => state);
 
   return (
     <li className="group/item flex flex-col gap-3 rounded-md p-3 hover:bg-slate-100 dark:hover:bg-slate-900">
       <div className="flex">
         <div className="flex w-full gap-3">
           <input
-            onChange={checkTodoHandler}
+            onChange={(e) => checkTodo({ ...todo, isDone: e.target.checked })}
             checked={todo.isDone}
             id="checked-checkbox"
             type="checkbox"

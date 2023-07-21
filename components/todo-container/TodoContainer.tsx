@@ -1,26 +1,11 @@
 "use client";
-import { FC, useEffect, useState } from "react";
-import { Todo } from "@/types/todo";
+import { FC } from "react";
 import { TodoForm } from "../todo-form/TodoForm";
 import { TodoList } from "../todo-list/TodoList";
 import { useStore } from "@/store/store";
 
 export const TodoContainer: FC = () => {
   const { selectedDate, todos } = useStore((state) => state);
-  const [_, setTodos] = useState<Todo[]>([]);
-
-  const todoCheckHandler = (updatedList: Todo[]) => setTodos(updatedList);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const list: Todo[] = JSON.parse(localStorage.getItem("todoList") || "[]");
-    setTodos(list);
-  }, []);
-
-  useEffect(() => {
-    console.log("TEST");
-    localStorage.setItem("todoList", JSON.stringify(todos));
-  }, [todos]);
 
   const todosByDate = todos.filter((t) => t.createdAt === selectedDate.date);
 
@@ -32,7 +17,7 @@ export const TodoContainer: FC = () => {
           <h2 className="text-base md:text-lg">Please add some todos for this date!</h2>
         </div>
       ) : (
-        <TodoList todos={todosByDate} onCheckTodoClick={todoCheckHandler} />
+        <TodoList todos={todosByDate} />
       )}
     </div>
   );
