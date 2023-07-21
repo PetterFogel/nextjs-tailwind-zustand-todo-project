@@ -27,7 +27,7 @@ export const TodoItem: FC<Props> = ({ todo, onDeleteTodoClick, onCheckTodoClick 
         </div>
         <div
           onClick={() => onDeleteTodoClick(todo.id)}
-          className="invisible cursor-pointer rounded-md text-gray-400 hover:text-red-500  group-hover/item:visible">
+          className="invisible ml-3 cursor-pointer rounded-md text-gray-400 hover:text-red-500 group-hover/item:visible">
           <TrashIcon className="color h-5 w-5" />
         </div>
       </div>
