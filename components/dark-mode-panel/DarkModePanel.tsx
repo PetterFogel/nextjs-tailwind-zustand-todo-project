@@ -26,19 +26,21 @@ export const DarkModePanel: FC = () => {
     localStorage.theme = "light";
   };
   return (
-    <Switch
-      checked={enabled}
-      onChange={toggleSwitchHandler}
-      className={`${
-        enabled ? "bg-primary" : "bg-gray-200"
-      } relative float-right inline-flex h-6 w-11 items-center rounded-full`}>
-      <span className="sr-only">Enable notifications</span>
-      <div
+    <div className="bg-red-500">
+      <Switch
+        checked={enabled}
+        onChange={toggleSwitchHandler}
         className={`${
-          enabled ? "translate-x-6" : "translate-x-1"
-        } inline-block h-4 w-4 transform rounded-full  transition`}>
-        {enabled ? <MoonIcon className="h-4 w-4" /> : <SunIcon className="h-4 w-4" />}
-      </div>
-    </Switch>
+          enabled ? "bg-primary" : "bg-gray-200"
+        } float-right inline-flex h-6 w-11 items-center self-end rounded-full`}>
+        <span className="sr-only">Enable notifications</span>
+        <div
+          className={`${
+            enabled ? "translate-x-6" : "translate-x-1"
+          } inline-block h-4 w-4 transform rounded-full  transition`}>
+          {enabled ? <MoonIcon className="h-4 w-4" /> : <SunIcon className="h-4 w-4" />}
+        </div>
+      </Switch>
+    </div>
   );
 };

@@ -13,7 +13,7 @@ export const CalendarPanel: FC = () => {
   }, [counter, setSelectedDate]);
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="inline-flex w-full items-center justify-center">
       <ChevronLeftIcon
         className="color h-10 w-10 cursor-pointer text-slate-500"
         onClick={() => setCounter(-1)}

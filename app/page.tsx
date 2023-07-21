@@ -4,7 +4,7 @@ import { TodoContainer } from "@/components/todo-container/TodoContainer";
 
 export default function Home() {
   return (
-    <main className="m-auto max-w-5xl space-y-4  p-4">
+    <main className="m-auto max-w-5xl space-y-4 p-4">
       <DarkModePanel />
       <CalendarPanel />
       <TodoContainer />
