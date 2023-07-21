@@ -8,6 +8,7 @@ interface State {
   setSelectedDate: (date: Date) => void;
   todos: Todo[];
   addTodo: (newTodo: Todo) => void;
+  deleteTodo: (todoId: string) => void;
 }
 
 const ifWindow = typeof window !== "undefined";
@@ -35,6 +36,13 @@ export const useStore = create<State>()((set) => ({
       setLocalStorageHandler(state);
       return {
         todos: [...state.todos, newTodo]
+      };
+    }),
+  deleteTodo: (todoId) =>
+    set((state) => {
+      setLocalStorageHandler(state);
+      return {
+        todos: state.todos.filter((t) => t.id !== todoId)
       };
     })
 }));

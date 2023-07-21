@@ -9,7 +9,6 @@ export const TodoContainer: FC = () => {
   const { selectedDate, todos } = useStore((state) => state);
   const [_, setTodos] = useState<Todo[]>([]);
 
-  const deleteTodoHandler = (updatedList: Todo[]) => setTodos(updatedList);
   const todoCheckHandler = (updatedList: Todo[]) => setTodos(updatedList);
 
   useEffect(() => {
@@ -19,6 +18,7 @@ export const TodoContainer: FC = () => {
   }, []);
 
   useEffect(() => {
+    console.log("TEST");
     localStorage.setItem("todoList", JSON.stringify(todos));
   }, [todos]);
 
@@ -32,11 +32,7 @@ export const TodoContainer: FC = () => {
           <h2 className="text-base md:text-lg">Please add some todos for this date!</h2>
         </div>
       ) : (
-        <TodoList
-          todos={todosByDate}
-          onDeleteTodoClick={deleteTodoHandler}
-          onCheckTodoClick={todoCheckHandler}
-        />
+        <TodoList todos={todosByDate} onCheckTodoClick={todoCheckHandler} />
       )}
     </div>
   );

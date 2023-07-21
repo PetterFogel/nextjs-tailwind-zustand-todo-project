@@ -1,14 +1,16 @@
-import { ChangeEvent, FC, useState } from "react";
+"use client";
+import { ChangeEvent, FC } from "react";
 import { Todo } from "@/types/todo";
+import { useStore } from "@/store/store";
 import { TrashIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   todo: Todo;
-  onDeleteTodoClick: (todoId: string) => void;
   onCheckTodoClick: (todo: Todo) => void;
 }
 
-export const TodoItem: FC<Props> = ({ todo, onDeleteTodoClick, onCheckTodoClick }) => {
+export const TodoItem: FC<Props> = ({ todo, onCheckTodoClick }) => {
+  const { deleteTodo } = useStore((state) => state);
   const checkTodoHandler = (event: ChangeEvent<HTMLInputElement>) => {
     onCheckTodoClick({ ...todo, isDone: event.target.checked });
   };
@@ -26,7 +28,7 @@ export const TodoItem: FC<Props> = ({ todo, onDeleteTodoClick, onCheckTodoClick 
           <p className="text-base font-medium capitalize">{todo.title}</p>
         </div>
         <div
-          onClick={() => onDeleteTodoClick(todo.id)}
+          onClick={() => deleteTodo(todo.id)}
           className="invisible ml-3 cursor-pointer rounded-md text-gray-400 hover:text-red-500 group-hover/item:visible">
           <TrashIcon className="color h-5 w-5" />
         </div>
