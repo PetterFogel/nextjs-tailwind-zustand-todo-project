@@ -1,14 +1,10 @@
 "use client";
-import { FC, useEffect, useState } from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { FC } from "react";
 import { useStore } from "@/store/store";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 
-interface Props {
-  selectedDate: { dayName: string; date: string };
-}
-
-export const CalendarPanel: FC<Props> = ({ selectedDate }) => {
-  const { setCounter } = useStore((state) => state);
+export const CalendarPanel: FC = () => {
+  const { setCounter, selectedDate } = useStore((state) => state);
 
   return (
     <div className="flex items-center justify-center">
@@ -17,7 +13,7 @@ export const CalendarPanel: FC<Props> = ({ selectedDate }) => {
         onClick={() => setCounter(-1)}
       />
       <div className="flex w-56 flex-col gap-2">
-        <h1 className="text-center text-4xl">{selectedDate.dayName}</h1>
+        <h1 className="text-center text-4xl">{selectedDate.day}</h1>
         <h1 className="text-center text-xl text-slate-500">{selectedDate.date}</h1>
       </div>
       <ChevronRightIcon

@@ -8,11 +8,7 @@ import { CalendarPanel } from "../calendar-panel/CalendarPanel";
 
 export const TodoContainer: FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const { counter } = useStore((state) => state);
-  const [selectedDate, setSelectedDate] = useState({
-    dayName: "",
-    date: ""
-  });
+  const { counter, selectedDate, setSelectedDate } = useStore((state) => state);
 
   const addTodoHandler = (newTodo: Todo) => setTodos((prevState) => [...prevState, newTodo]);
   const deleteTodoHandler = (updatedList: Todo[]) => setTodos(updatedList);
@@ -31,19 +27,16 @@ export const TodoContainer: FC = () => {
   useEffect(() => {
     const date = new Date();
     date.setDate(date.getDate() + counter);
-    setSelectedDate({
-      dayName: date.toLocaleString("en-GB", { weekday: "long" }),
-      date: date.toLocaleString("en-GB", { dateStyle: "medium" })
-    });
-  }, [counter]);
+    setSelectedDate(date);
+  }, [counter, setSelectedDate]);
 
   const todosByDate = todos.filter((t) => t.createdAt === selectedDate.date);
 
   return (
     <>
-      <CalendarPanel selectedDate={selectedDate} />
+      <CalendarPanel />
       <div className="flex flex-col gap-4 text-sm lg:flex-row">
-        <TodoForm onAddTodoClick={addTodoHandler} selectedDate={selectedDate.date} />
+        <TodoForm onAddTodoClick={addTodoHandler} />
         {!todos || todosByDate.length === 0 ? (
           <div className="flex-1 px-4 text-center">
             <h2 className="text-base md:text-lg">Please add some todos for this date!</h2>
