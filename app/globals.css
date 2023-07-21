@@ -41,7 +41,7 @@
   }
 
   .btn-primary {
-    @apply bg-primary hover:bg-primaryHover;
+    @apply bg-primary hover:bg-primaryHover text-white;
   }
 }
 
