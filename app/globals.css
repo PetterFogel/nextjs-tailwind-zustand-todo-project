@@ -10,49 +10,25 @@
 
 @layer base {
   body {
-    @apply text-black dark:text-white;
-    @apply bg-defaultLight dark:bg-black;
+    @apply text-black dark:text-white bg-defaultLight dark:bg-black;
   }
 }
 
 @layer components {
   .card {
-    @apply px-4;
-    @apply py-6;
-    @apply bg-white dark:bg-defaultDark;
-    @apply rounded-lg;
-    @apply ring-1;
-    @apply ring-slate-900/5;
-    @apply shadow-md;
-    @apply flex-1;
-    @apply h-full
+
+    @apply px-4 py-6 h-full flex-1 shadow-md rounded-lg ring-1 ring-slate-900/5 bg-white dark:bg-defaultDark ;
   }
 
   input[type=text] {
-    @apply appearance-none;
-    @apply rounded-md;
-    @apply px-3;
-    @apply py-2;
-    @apply shadow;
-    @apply ring-1;
-    @apply border-none;
-    @apply text-sm;
-    @apply dark:bg-defaultDark;
-    @apply ring-gray-950/10 dark:ring-gray-500;
-    @apply focus:ring-indigo-500;
+    @apply px-3 py-2 rounded-md shadow ring-1 border-none text-sm appearance-none;
+    @apply dark:bg-defaultDark ring-gray-950/10 dark:ring-gray-500 focus:ring-indigo-500;
 
   }
 
   input[type=checkbox] {
-    @apply h-6;
-    @apply w-6;
-    @apply shadow-sm;
-    @apply rounded-full;
-    @apply cursor-pointer;
-    @apply focus:ring-2;
-    @apply focus:ring-indigo-500;
-    @apply bg-white dark:bg-defaultDark;
-    @apply border-gray-700/20 dark:border-gray-500;
+    @apply h-6 w-6 rounded-full shadow-sm cursor-pointer;
+    @apply bg-white dark:bg-defaultDark focus:ring-2 focus:ring-indigo-500 border-gray-700/20 dark:border-gray-500;
   }
 
   input[type=checkbox]:checked {
@@ -61,18 +37,10 @@
   }
 
   .btn {
-    @apply p-2;
-    @apply ring-1;
-    @apply rounded-lg;
-    @apply font-semibold;
-    @apply appearance-none;
-    @apply ring-gray-950/10;
-    @apply focus:ring-indigo-500;
- 
+    @apply ring-1 p-2 rounded-lg font-semibold appearance-none ring-gray-950/10 focus:ring-indigo-500; 
   }
 
   .btn-primary {
-    @apply text-white;
     @apply bg-primary hover:bg-primaryHover;
   }
 }
