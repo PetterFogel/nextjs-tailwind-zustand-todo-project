@@ -1,18 +1,13 @@
 "use client";
-import { useStore } from "@/store/store";
-import { Todo } from "@/types/todo";
-import { ChangeEvent, FC, FormEvent, useState } from "react";
-import { v4 as uuid } from "uuid";
 import { Card } from "../card/Card";
+import { useStore } from "@/store/store";
+import { v4 as uuid } from "uuid";
+import { FC, FormEvent, useState } from "react";
 
-interface Props {
-  onAddTodoClick: (todo: Todo) => void;
-}
-
-export const TodoForm: FC<Props> = ({ onAddTodoClick }) => {
+export const TodoForm: FC = () => {
   const [titleValue, setTitleValue] = useState("");
   const [descValue, setDescValue] = useState("");
-  const { selectedDate } = useStore((state) => state);
+  const { selectedDate, addTodo } = useStore((state) => state);
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,7 +21,7 @@ export const TodoForm: FC<Props> = ({ onAddTodoClick }) => {
       isDone: false,
       createdAt: selectedDate.date
     };
-    onAddTodoClick(newTodo);
+    addTodo(newTodo);
     setTitleValue("");
     setDescValue("");
   };

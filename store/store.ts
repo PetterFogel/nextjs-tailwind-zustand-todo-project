@@ -1,3 +1,4 @@
+import { Todo } from "@/types/todo";
 import { create } from "zustand";
 
 interface State {
@@ -5,7 +6,16 @@ interface State {
   setCounter: (number: number) => void;
   selectedDate: { day: string; date: string };
   setSelectedDate: (date: Date) => void;
+  todos: Todo[];
+  addTodo: (newTodo: Todo) => void;
 }
+
+const ifWindow = typeof window !== "undefined";
+
+const todos = ifWindow ? JSON.parse(localStorage.getItem("todoList") || "[]") : [];
+
+const setLocalStorageHandler = (state: State) =>
+  localStorage.setItem("todoList", JSON.stringify(state.todos));
 
 export const useStore = create<State>()((set) => ({
   counter: 0,
@@ -18,5 +28,13 @@ export const useStore = create<State>()((set) => ({
         day: date.toLocaleString("en-GB", { weekday: "long" }),
         date: date.toLocaleString("en-GB", { dateStyle: "medium" })
       }
-    }))
+    })),
+  todos,
+  addTodo: (newTodo) =>
+    set((state) => {
+      setLocalStorageHandler(state);
+      return {
+        todos: [...state.todos, newTodo]
+      };
+    })
 }));
