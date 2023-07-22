@@ -1,10 +1,10 @@
-import { State } from "./type";
 import { create } from "zustand";
+import { Actions, State } from "./types";
 
 const ifWindow = typeof window !== "undefined";
 const todos = ifWindow ? JSON.parse(localStorage.getItem("todoList") || "[]") : [];
 
-export const useStore = create<State>()((set) => ({
+export const useStore = create<State & Actions>()((set) => ({
   counter: 0,
   setCounter: (number) => set((state) => ({ counter: state.counter + number })),
   selectedDate: { day: "", date: "" },

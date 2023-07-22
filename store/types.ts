@@ -2,10 +2,13 @@ import { Todo } from "@/types/todo";
 
 export interface State {
   counter: number;
-  setCounter: (number: number) => void;
   selectedDate: { day: string; date: string };
-  setSelectedDate: (date: Date) => void;
   todos: Todo[];
+}
+
+export interface Actions {
+  setCounter: (number: number) => void;
+  setSelectedDate: (date: Date) => void;
   addTodo: (newTodo: Todo) => void;
   deleteTodo: (todoId: string) => void;
   checkTodo: (todo: Todo) => void;
