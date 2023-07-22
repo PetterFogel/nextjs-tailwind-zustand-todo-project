@@ -4,10 +4,15 @@ import { Actions, State } from "./types";
 const ifWindow = typeof window !== "undefined";
 const todos = ifWindow ? JSON.parse(localStorage.getItem("todoList") || "[]") : [];
 
-export const useStore = create<State & Actions>()((set) => ({
+const initialState: State = {
   counter: 0,
-  setCounter: (number) => set((state) => ({ counter: state.counter + number })),
   selectedDate: { day: "", date: "" },
+  todos
+};
+
+export const useStore = create<State & Actions>()((set) => ({
+  ...initialState,
+  setCounter: (number) => set((state) => ({ counter: state.counter + number })),
   setSelectedDate: (date) =>
     set((state) => ({
       selectedDate: {
@@ -16,7 +21,6 @@ export const useStore = create<State & Actions>()((set) => ({
         date: date.toLocaleString("en-GB", { dateStyle: "medium" })
       }
     })),
-  todos,
   addTodo: (newTodo) => set((state) => ({ todos: [...state.todos, newTodo] })),
   deleteTodo: (todoId) => set((state) => ({ todos: state.todos.filter((t) => t.id !== todoId) })),
   checkTodo: (todo) =>
