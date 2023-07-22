@@ -14,7 +14,7 @@ export const TodoContainer: FC = () => {
   const todosByDate = todos.filter((t) => t.createdAt === selectedDate.date);
 
   return (
-    <div className="flex flex-col gap-4 text-sm lg:flex-row">
+    <div className="flex flex-col gap-4 text-sm md:flex-row">
       <TodoForm />
       {!todos || todosByDate.length === 0 ? (
         <div className="flex-1 px-4 text-center">
