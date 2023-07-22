@@ -1,16 +1,5 @@
-import { Todo } from "@/types/todo";
+import { State } from "./type";
 import { create } from "zustand";
-
-interface State {
-  counter: number;
-  setCounter: (number: number) => void;
-  selectedDate: { day: string; date: string };
-  setSelectedDate: (date: Date) => void;
-  todos: Todo[];
-  addTodo: (newTodo: Todo) => void;
-  deleteTodo: (todoId: string) => void;
-  checkTodo: (todo: Todo) => void;
-}
 
 const ifWindow = typeof window !== "undefined";
 const todos = ifWindow ? JSON.parse(localStorage.getItem("todoList") || "[]") : [];
@@ -28,22 +17,10 @@ export const useStore = create<State>()((set) => ({
       }
     })),
   todos,
-  addTodo: (newTodo) =>
-    set((state) => {
-      return {
-        todos: [...state.todos, newTodo]
-      };
-    }),
-  deleteTodo: (todoId) =>
-    set((state) => {
-      return {
-        todos: state.todos.filter((t) => t.id !== todoId)
-      };
-    }),
+  addTodo: (newTodo) => set((state) => ({ todos: [...state.todos, newTodo] })),
+  deleteTodo: (todoId) => set((state) => ({ todos: state.todos.filter((t) => t.id !== todoId) })),
   checkTodo: (todo) =>
-    set((state) => {
-      return {
-        todos: state.todos.map((t) => (t.id === todo.id ? { ...t, isDone: todo.isDone } : t))
-      };
-    })
+    set((state) => ({
+      todos: state.todos.map((t) => (t.id === todo.id ? { ...t, isDone: todo.isDone } : t))
+    }))
 }));
