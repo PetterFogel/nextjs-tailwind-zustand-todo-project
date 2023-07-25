@@ -20,7 +20,7 @@ export const TodoItem: FC<Props> = ({ todo }) => {
             id="checked-checkbox"
             type="checkbox"
           />
-          <p className="text-base font-medium capitalize">{todo.title}</p>
+          <p className="text-base font-medium">{todo.title}</p>
         </div>
         <div
           onClick={() => deleteTodo(todo.id)}
