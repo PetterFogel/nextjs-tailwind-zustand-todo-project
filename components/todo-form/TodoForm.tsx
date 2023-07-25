@@ -2,7 +2,7 @@
 import { FC } from "react";
 import { Card } from "../card/Card";
 import { useStore } from "@/store/store";
-import { v4 as uuid } from "uuid";
+import { v4 as uniqueId } from "uuid";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface IForm {
@@ -12,8 +12,13 @@ interface IForm {
 
 export const TodoForm: FC = () => {
   const { selectedDate, addTodo } = useStore((state) => state);
-
-  const { register, handleSubmit, reset } = useForm<IForm>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: { errors }
+  } = useForm<IForm>({
     defaultValues: {
       title: "",
       description: ""
@@ -22,11 +27,10 @@ export const TodoForm: FC = () => {
 
   const onSubmit: SubmitHandler<IForm> = (data) => {
     const { title, description } = data;
-    const isValueEmpty = !title.replace(/\s/g, "").length;
-    if (isValueEmpty) return;
-    const uniqueId = uuid();
+    const isTitleEmpty = !title.replace(/\s/g, "").length;
+    if (isTitleEmpty) return setError("title", { message: "Please enter title" });
     const newTodo = {
-      id: uniqueId,
+      id: uniqueId(),
       title: title.trim(),
       description: description.trim(),
       isDone: false,
@@ -40,12 +44,18 @@ export const TodoForm: FC = () => {
     <Card>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
         <input
-          required
           type="text"
           placeholder="Title"
-          {...register("title", { required: true })}
+          className={`${errors.title && "error"}`}
+          {...register("title", { required: "Please enter title" })}
         />
-        <input type="text" placeholder="Description" {...register("description")} />
+        {errors.title && <p className="ml-3 text-sm text-red-500">{errors.title?.message}</p>}
+        <input
+          type="text"
+          placeholder="Description"
+          className="border-none"
+          {...register("description")}
+        />
         <button className="btn btn-primary" type="submit">
           Add
         </button>
