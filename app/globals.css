@@ -25,7 +25,7 @@
   }
 
   input[type=text].error {
-    @apply border-red-500 focus:ring-red-500;
+    @apply border-red-500 focus:ring-red-500 ring-red-500/10;
 
   }
 

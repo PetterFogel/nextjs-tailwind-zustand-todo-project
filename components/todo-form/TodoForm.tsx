@@ -49,7 +49,7 @@ export const TodoForm: FC = () => {
           className={`${errors.title && "error"}`}
           {...register("title", { required: "Please enter title" })}
         />
-        {errors.title && <p className="ml-3 text-sm text-red-500">{errors.title?.message}</p>}
+        {errors.title && <p className="ml-3 text-red-500">{errors.title?.message}</p>}
         <input
           type="text"
           placeholder="Description"
