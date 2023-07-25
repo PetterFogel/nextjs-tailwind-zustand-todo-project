@@ -1,48 +1,51 @@
 "use client";
+import { FC } from "react";
 import { Card } from "../card/Card";
 import { useStore } from "@/store/store";
 import { v4 as uuid } from "uuid";
-import { FC, FormEvent, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+interface IForm {
+  title: string;
+  description: string;
+}
 
 export const TodoForm: FC = () => {
-  const [titleValue, setTitleValue] = useState("");
-  const [descValue, setDescValue] = useState("");
   const { selectedDate, addTodo } = useStore((state) => state);
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const isValueEmpty = !titleValue.replace(/\s/g, "").length;
+  const { register, handleSubmit, reset } = useForm<IForm>({
+    defaultValues: {
+      title: "",
+      description: ""
+    }
+  });
+
+  const onSubmit: SubmitHandler<IForm> = (data) => {
+    const { title, description } = data;
+    const isValueEmpty = !title.replace(/\s/g, "").length;
     if (isValueEmpty) return;
     const uniqueId = uuid();
     const newTodo = {
       id: uniqueId,
-      title: titleValue.trim(),
-      description: descValue.trim(),
+      title: title.trim(),
+      description: description.trim(),
       isDone: false,
       createdAt: selectedDate.date
     };
     addTodo(newTodo);
-    setTitleValue("");
-    setDescValue("");
+    reset();
   };
 
   return (
     <Card>
-      <form onSubmit={submitHandler} className="flex flex-col gap-3">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
         <input
           required
           type="text"
           placeholder="Title"
-          value={titleValue}
-          onChange={(e) => setTitleValue(e.target.value)}
+          {...register("title", { required: true })}
         />
-        <input
-          type="text"
-          placeholder="Description"
-          value={descValue}
-          onChange={(e) => setDescValue(e.target.value)}
-        />
-
+        <input type="text" placeholder="Description" {...register("description")} />
         <button className="btn btn-primary" type="submit">
           Add
         </button>
