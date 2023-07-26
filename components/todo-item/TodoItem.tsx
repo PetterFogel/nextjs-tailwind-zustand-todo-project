@@ -1,5 +1,6 @@
-import { ChangeEvent, FC } from "react";
+import { FC } from "react";
 import { Todo } from "@/types/todo";
+import { Tooltip } from "react-tooltip";
 import { useStore } from "@/store/store";
 import { TrashIcon } from "@heroicons/react/24/solid";
 
@@ -25,7 +26,8 @@ export const TodoItem: FC<Props> = ({ todo }) => {
         <div
           onClick={() => deleteTodo(todo.id)}
           className="invisible ml-3 cursor-pointer rounded-md text-gray-400 hover:text-red-500 group-hover/item:visible">
-          <TrashIcon className="color h-5 w-5" />
+          <TrashIcon data-tooltip-id="delete-tooltip" className="color h-5 w-5" />
+          <Tooltip id="delete-tooltip" content="Delete todo" />
         </div>
       </div>
       {todo.description && (
