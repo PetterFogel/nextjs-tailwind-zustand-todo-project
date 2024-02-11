@@ -5,61 +5,87 @@ import { useStore } from "@/store/store";
 import { v4 as uniqueId } from "uuid";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-interface IForm {
-  title: string;
-  description: string;
-}
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 export const TodoForm: FC = () => {
   const { selectedDate, addTodo } = useStore((state) => state);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    setError,
-    formState: { errors }
-  } = useForm<IForm>({
+
+  const formSchema = z.object({
+    title: z.string().min(1, {
+      message: "Please enter title."
+    }),
+    description: z.string()
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
       description: ""
     }
   });
 
-  const onSubmit: SubmitHandler<IForm> = (data) => {
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
+    console.log("TEST", data);
     const { title, description } = data;
-    const isTitleEmpty = !title.replace(/\s/g, "").length;
-    if (isTitleEmpty) return setError("title", { message: "Please enter title" });
     const newTodo = {
       id: uniqueId(),
-      title: title.trim(),
-      description: description.trim(),
+      title,
+      description,
       isDone: false,
       createdAt: selectedDate.date
     };
     addTodo(newTodo);
-    reset();
   };
 
   return (
     <Card>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-        <input
-          type="text"
-          placeholder="Title"
-          className={`${errors.title && "error"}`}
-          {...register("title", { required: "Please enter title" })}
-        />
-        {errors.title && <p className="ml-3 text-red-500">{errors.title?.message}</p>}
-        <input
-          type="text"
-          placeholder="Description"
-          className="border-none"
-          {...register("description")}
-        />
-        <button className="btn btn-primary" type="submit">
-          Add
-        </button>
-      </form>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Title</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter title" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter description" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit" className="w-full">
+            Submit
+          </Button>
+        </form>
+      </Form>
     </Card>
   );
 };
