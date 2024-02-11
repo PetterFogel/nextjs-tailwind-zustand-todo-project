@@ -65,9 +65,3 @@
   }
 }
 
-@layer components {
-  .card {
-    @apply px-4 py-6 h-full flex-1 shadow-md rounded-lg ring-1 ring-slate-900/5 bg-white dark:bg-defaultDark ;
-  }
-}
-

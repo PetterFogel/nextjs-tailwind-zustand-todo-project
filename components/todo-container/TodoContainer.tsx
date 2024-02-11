@@ -13,8 +13,8 @@ export const TodoContainer: FC = () => {
     <div className="flex flex-col gap-4 text-sm md:flex-row">
       <TodoForm />
       {!todos || todosByDate.length === 0 ? (
-        <div className="flex-1 px-4 text-center">
-          <h2 className="text-base md:text-lg">Please add some todos for this date!</h2>
+        <div className="w-full">
+          <h2 className="text-base font-medium md:text-lg">Please add some todos for this date!</h2>
         </div>
       ) : (
         <TodoList todos={todosByDate} />

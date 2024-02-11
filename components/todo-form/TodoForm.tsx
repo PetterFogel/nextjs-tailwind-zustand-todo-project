@@ -1,24 +1,21 @@
 "use client";
-import { FC } from "react";
-import { Card } from "../card/Card";
-import { useStore } from "@/store/store";
-import { v4 as uniqueId } from "uuid";
-import { SubmitHandler, useForm } from "react-hook-form";
-
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-
+import { FC } from "react";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useForm } from "react-hook-form";
+import { useStore } from "@/store/store";
+import { CardWrapper } from "../card-wrapper/CardWrapper";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { v4 as uniqueId } from "uuid";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 
 export const TodoForm: FC = () => {
   const { selectedDate, addTodo } = useStore((state) => state);
@@ -39,7 +36,6 @@ export const TodoForm: FC = () => {
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log("TEST", data);
     const { title, description } = data;
     const newTodo = {
       id: uniqueId(),
@@ -52,9 +48,9 @@ export const TodoForm: FC = () => {
   };
 
   return (
-    <Card>
+    <CardWrapper title="Create todo" description="Enter todays todos in the form.">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
             name="title"
@@ -73,7 +69,9 @@ export const TodoForm: FC = () => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>
+                  Description <span className="text-xs text-neutral-300">(Optional)</span>{" "}
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="Enter description" {...field} />
                 </FormControl>
@@ -86,6 +84,6 @@ export const TodoForm: FC = () => {
           </Button>
         </form>
       </Form>
-    </Card>
+    </CardWrapper>
   );
 };

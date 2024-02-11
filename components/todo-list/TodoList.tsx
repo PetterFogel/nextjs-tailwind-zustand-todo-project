@@ -1,8 +1,8 @@
 "use client";
 import { FC } from "react";
 import { Todo } from "@/types/todo";
-import { Card } from "../card/Card";
 import { TodoItem } from "../todo-item/TodoItem";
+import { CardWrapper } from "../card-wrapper/CardWrapper";
 
 interface Props {
   todos: Todo[];
@@ -10,12 +10,12 @@ interface Props {
 
 export const TodoList: FC<Props> = ({ todos }) => {
   return (
-    <Card>
+    <CardWrapper title="Todays Todos">
       <ul role="list">
         {todos.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />
         ))}
       </ul>
-    </Card>
+    </CardWrapper>
   );
 };
